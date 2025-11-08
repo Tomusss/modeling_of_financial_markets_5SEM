@@ -255,36 +255,6 @@ w <- sol$solution
 w
 
 
-
-library(quadprog)
-
-# 1. Dane
-dane_ABC <- as.matrix(read.csv("list4/NotowaniaABC.csv"))
-ret <- diff(dane_ABC) / head(dane_ABC, -1)
-C <- cov(ret)
-mean_r <- colMeans(ret)
-n <- ncol(C)
-
-Dmat <- 2 * C
-dvec <- rep(0, n)
-
-# 2. Ograniczenia jako kolumny
-u <- rep(1, n)
-r_target <- 0.15
-m <- mean_r
-
-Amat <- cbind(u, m)   # 3x2, kolumny = ograniczenia
-bvec <- c(1, r_target)
-meq <- 2              # dwie pierwsze kolumny = równania
-
-# 3. Rozwiązanie
-sol <- solve.QP(Dmat, dvec, Amat, bvec, meq)
-w_qp <- sol$solution
-w_qp
-
-
-
-
 #_______________________________________________________________________________
 #
 #------------------------------Zadanie 4.7--------------------------------------
