@@ -70,6 +70,8 @@ for (i in 2:nrow(dane)) {
 
 write.csv(dane, "list4/TermStructureZero1.csv", row.names = FALSE)
 
+dane$ForwardRate[10]
+dane$SpotRate[10]
 
 #_______________________________________________________________________________
 #
@@ -120,6 +122,9 @@ for (i in 2:nrow(dane)) {
 ##print(dane_1$ForwardRate[10])
 write.csv(dane_1, "list4/TermStructure1.csv", row.names = FALSE)
 
+dane_1$ForwardRate[10]
+dane_1$SpotRate[10]
+
 #_______________________________________________________________________________
 #
 #------------------------------Zadanie 4.4--------------------------------------
@@ -165,13 +170,15 @@ ocz_zwrot <- mean(dane_noto$zwrotA, na.rm = TRUE) * w_A +
   mean(dane_noto$zwrotB, na.rm = TRUE) * w_B +
   mean(dane_noto$zwrotC, na.rm = TRUE) * w_C
 
-wariancja <- sqrt(var(dane_noto$zwrotA, na.rm = TRUE) * w_A^2 + 
+odch_stand <- sqrt(var(dane_noto$zwrotA, na.rm = TRUE) * w_A^2 + 
   var(dane_noto$zwrotB, na.rm = TRUE) * w_B^2 +
   var(dane_noto$zwrotC, na.rm = TRUE) * w_C^2 + 
   2*w_A*w_B*cov(dane_noto$zwrotA,dane_noto$zwrotB,use="complete.obs")+
   2*w_A*w_C*cov(dane_noto$zwrotA,dane_noto$zwrotC,use="complete.obs")+
   2*w_C*w_B*cov(dane_noto$zwrotB,dane_noto$zwrotC,use="complete.obs"))
 
+ocz_zwrot
+odch_stand 
 #_______________________________________________________________________________
 #
 #------------------------------Zadanie 4.5--------------------------------------
@@ -253,36 +260,6 @@ meq <- 2
 sol <- solve.QP(Dmat, dvec, Amat, bvec, meq)
 w <- sol$solution
 w
-
-
-
-library(quadprog)
-
-# 1. Dane
-dane_ABC <- as.matrix(read.csv("list4/NotowaniaABC.csv"))
-ret <- diff(dane_ABC) / head(dane_ABC, -1)
-C <- cov(ret)
-mean_r <- colMeans(ret)
-n <- ncol(C)
-
-Dmat <- 2 * C
-dvec <- rep(0, n)
-
-# 2. Ograniczenia jako kolumny
-u <- rep(1, n)
-r_target <- 0.15
-m <- mean_r
-
-Amat <- cbind(u, m)   # 3x2, kolumny = ograniczenia
-bvec <- c(1, r_target)
-meq <- 2              # dwie pierwsze kolumny = równania
-
-# 3. Rozwiązanie
-sol <- solve.QP(Dmat, dvec, Amat, bvec, meq)
-w_qp <- sol$solution
-w_qp
-
-
 
 
 #_______________________________________________________________________________
