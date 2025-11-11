@@ -58,7 +58,7 @@ stopa
 # ForwardRate = stopa terminowa dla n-tego roku.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-dane <- read.csv("C:\\Users\\olgaf\\OneDrive\\Pulpit\\MRF_2025\\lista 4\\TermStructureZero.csv", header = TRUE, sep = ",")
+dane <- read.csv("list4/TermStructureZero.csv", header = TRUE, sep = ",")
 
 dane$SpotRate <- (100/dane$Quote)^(1/dane$Maturity)-1
 
@@ -68,7 +68,7 @@ for (i in 2:nrow(dane)) {
     (((1+dane$SpotRate[i])^dane$Maturity[i])/((1+dane$SpotRate[i-1])^dane$Maturity[i-1]) -1)
 }
 
-write.csv(dane, "C:\\Users\\olgaf\\OneDrive\\Pulpit\\MRF_2025\\lista 4\\TermStructureZero1.csv", row.names = FALSE)
+write.csv(dane, "list4/TermStructureZero1.csv", row.names = FALSE)
 
 
 #_______________________________________________________________________________
@@ -90,7 +90,7 @@ write.csv(dane, "C:\\Users\\olgaf\\OneDrive\\Pulpit\\MRF_2025\\lista 4\\TermStru
 # SpotRate      = stopa spot dla n lat (zerokuponowa)
 # ForwardRate   = stopa terminowa dla n-tego roku.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-dane_1 <- read.csv("C:\\Users\\olgaf\\OneDrive\\Pulpit\\MRF_2025\\lista 4\\TermStructure.csv", header = TRUE, sep = ",")
+dane_1 <- read.csv("list4/TermStructure.csv", header = TRUE, sep = ",")
 
 C <- dane_1$Coupon[1]
 F <- dane_1$FV[1]
@@ -118,7 +118,7 @@ for (i in 2:nrow(dane)) {
     (((1+dane_1$SpotRate[i])^dane_1$Maturity[i])/((1+dane_1$SpotRate[i-1])^dane_1$Maturity[i-1]) -1)
 }
 ##print(dane_1$ForwardRate[10])
-write.csv(dane_1, "C:\\Users\\olgaf\\OneDrive\\Pulpit\\MRF_2025\\lista 4\\TermStructure1.csv", row.names = FALSE)
+write.csv(dane_1, "list4/TermStructure1.csv", row.names = FALSE)
 
 #_______________________________________________________________________________
 #
@@ -135,7 +135,7 @@ write.csv(dane_1, "C:\\Users\\olgaf\\OneDrive\\Pulpit\\MRF_2025\\lista 4\\TermSt
 
 # podpunkt 4.4a
 
-dane_noto <- read.csv("C:\\Users\\olgaf\\OneDrive\\Pulpit\\MRF_2025\\lista 4\\NotowaniaABC.csv", header = TRUE, sep = ",")
+dane_noto <- read.csv("list4/NotowaniaABC.csv", header = TRUE, sep = ",")
 dane_noto$zwrotA <- NA
 dane_noto$zwrotB <- NA
 dane_noto$zwrotC <- NA
