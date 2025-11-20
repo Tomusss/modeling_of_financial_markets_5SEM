@@ -99,12 +99,17 @@ kowariancja
 # aby współczynnik beta dla portfela osiągnął poziom 1,65?
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
+# beta portfela to średnia ważona wszystkich akcji - u nas ta sama waga
 
+beta_v1 = 1.7
+beta_a1 = 1.8
+beta_v2 = 1.65 
 
+beta <- function(beta_a2){
+  return((beta_a2 + (5*beta_v1 - beta_a1)) / 5 - beta_v2)
+}
 
-
-
-
+uniroot(beta, c(0,2))$root
 
 #_______________________________________________________________________________
 #
@@ -246,6 +251,7 @@ zysk
 
 # 1 opcja: kupujemy EUR, potem JPY
 # 2 opcja: kupujemy JPY
+
 
 
 
