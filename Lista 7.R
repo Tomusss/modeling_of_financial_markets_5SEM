@@ -96,14 +96,14 @@ Pe
 
 BlackScholesGreeks=function(S, X, time, r, sigma){
   
-  d1 <- (log(S/X) + time*(r + sigma^2))/(sigma*sqrt(time))
+  d1 <- (log(S/X) + time*(r + 0.5*sigma^2))/(sigma*sqrt(time))
   d2 <- d1 - sigma*sqrt(time)
   CE <- S*pnorm(d1) - X*exp(-r*time)*pnorm(d2)
   PE <- X*exp(-r*time)*(1-pnorm(d2)) - S*pnorm(-d1)
   DeltaCall <- pnorm(d1)
   DeltaPut <- 1-pnorm(d1) 
-  Gamma <- pnorm(d1)/(S*sigma*sqrt(time))
-  Vega <- S* pnorm(d1)*sqrt(time)
+  Gamma <- dnorm(d1)/(S*sigma*sqrt(time))
+  Vega <- S* dnorm(d1)*sqrt(time)
   
   return(c(CE,PE,DeltaCall,DeltaPut, Gamma, Vega))
 }
@@ -346,5 +346,6 @@ MC.euro=function(TypeFlag=c("call","put"),t,r,sigma,S,X,N=500,n=100){
   
   
 }
+
 
 
