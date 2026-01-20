@@ -298,26 +298,6 @@ BinomialTreePlot <- function(Tree){
 # k=1,...,n oraz j=1,...,N, natomiast [w_j^{(1)},...,w_j^{(n)}] 
 # jest (dla ustalonego j) próbą rozmiaru n ze standardowego rozkładu normalnego.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
-# Napisz funkcję
-#
-# BrownianMotion(n=1, N, t, mu, sigma, S),
-#
-# zwracającą macierz U rozmiaru N x n, której wierszami są niezależne trajektorie
-# ruchu Browna (na przedziale [0,t] i startujacego z punktu S)
-# z parametrami mu oraz sigma.
-#
-# W szczególności, k-ta wartość dla j-tej trajektorii (tj. S_j(kt/n))
-# jest generowana zgodnie z następującym schematem Eulera
-#
-# S_j(0)=S, S_j(k*t/n) = S_j((k-1)*t/n) + mu * t/n + sigma * \sqrt{t/n} * w_j^(k)
-#
-# gdzie
-#
-# k=1,...,n oraz j=1,...,N, natomiast [w_j^{(1)},...,w_j^{(n)}] 
-# jest (dla ustalonego j) próbą rozmiaru n ze standardowego rozkładu normalnego.
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
 BrownianMotion=function(N, n, t, mu, sigma, S){
   macierz <- matrix(0, nrow=N, ncol=n)
   macierz[,1]<-S
@@ -334,7 +314,6 @@ BrownianMotion=function(N, n, t, mu, sigma, S){
   return(macierz)
 }
 BrownianMotion(N=50, n=7, t=10, mu=0.5, sigma=1, S=50)
-
 #_______________________________________________________________________________
 #
 #------------------------------Zadanie 7.9--------------------------------------
@@ -366,6 +345,7 @@ MC.euro=function(TypeFlag=c("call","put"),t,r,sigma,S,X,N=500,n=100){
   
   
 }
+
 
 
 
